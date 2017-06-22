@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Filter extends Component {
-  constructor() {
-    super();
+const defaultLimit = 100
 
-    this.state = {
-      filters: []
-    };
-  }
+const Filter =(props)=>{
+  // constructor() {
+  //   super();
 
-  componentWillMount() {
-    this.fetchFilters();
-  }
+  //   this.state = {
+  //     filters: []
+  //   };
+  // }
 
-  fetchFilters = () => {
-    fetch('/api/fruit_types')
-      .then(response => response.json())
-      .then(filters => this.setState({ filters }));
-  }
+  // componentWillMount() {
+  //   this.fetchFilters();
+  // }
 
-  render() {
-    return (
-      <select onChange={this.props.handleChange} defaultValue='all'>
-        <option value='all'>All</option>
-        {this.state.filters.map(filter =>
-          <option key={filter} value={filter}>{filter}</option>
-        )}
-      </select>
-    );
-  }
+  // fetchFilters = () => {
+  //   fetch('/api/fruit_types')
+  //     .then(response => response.json())
+  //     .then(filters => this.setState({ filters }));
+  // }
+
+  return (
+    <select onChange={props.handleChange} defaultValue='all'>
+      <option value='all'>All</option>
+      {props.filters.map(filter =>
+        <option key={filter} value={filter}>{filter}</option>
+      )}
+    </select>
+  );
+}
+
+Filter.defaultProps = {
+  filters: [],
+  handleChange: function() {}
 }
 
 export default Filter;
